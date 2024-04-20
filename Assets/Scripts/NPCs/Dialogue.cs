@@ -6,4 +6,5 @@ public class Dialogue : MonoBehaviour
 {
     public string[] dialogue;
     public Sprite portrait;
+    public bool npc;
 }

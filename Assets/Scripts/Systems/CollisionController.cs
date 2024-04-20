@@ -23,7 +23,7 @@ public class CollisionController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("NPC"))
+        if (other.CompareTag("NPC") && other.GetComponent<Dialogue>().npc)
         {
             bInside = true;
         }
@@ -32,6 +32,7 @@ public class CollisionController : MonoBehaviour
             dialogueSystemController.getPortraitPanel().SetActive(true);
             dialogueSystemController.SetDialogue(other.GetComponent<Dialogue>().dialogue);
             dialogueSystemController.SetPortrait(other.GetComponent<Dialogue>().portrait);
+            dialogueSystemController.SetIsNPC(other.GetComponent<Dialogue>().npc);
             greenButton.interactable = true;
             ColorBlock colours = greenButton.colors;
             Color normalColour = colours.normalColor;

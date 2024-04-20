@@ -20,6 +20,8 @@ public class DialogueSystemController : MonoBehaviour
     private Text dialogueText;
     private bool bDialogueOpen;
     private bool bChatOnGoing;
+    private bool bNPC;
+    private AudioSystemController audioSystemController;
     
     void Start()
     {
@@ -28,6 +30,7 @@ public class DialogueSystemController : MonoBehaviour
         portraitPanel = GameObject.Find("Canvas/PortraitPanel");
         dialogueText = GameObject.Find("Canvas/DialoguePanel/Text").GetComponent<Text>();
         collisionController = GameObject.Find("Entities/Player").GetComponent<CollisionController>();
+        audioSystemController = GameObject.Find("Systems").GetComponent<AudioSystemController>();
         greenButton = collisionController.GetGreenButton();
         redButton = collisionController.GetRedButton();
         dialoguePanel.SetActive(false);
@@ -51,6 +54,11 @@ public class DialogueSystemController : MonoBehaviour
         bDialogueOpen = value;
     }
 
+    public void SetIsNPC(bool bNPC)
+    {
+        this.bNPC = bNPC;
+    }
+
     public GameObject getPortraitPanel()
     {
         return portraitPanel;
@@ -68,23 +76,31 @@ public class DialogueSystemController : MonoBehaviour
 
     public void OpenDialogue()
     {
-        bDialogueOpen = true;
-        bChatOnGoing = true;
-        greenButton.interactable = false;
-        if (dialoguePanel.activeInHierarchy)
+        if (bNPC)
         {
-            if (index == dialogue.Length - 1)
+            bDialogueOpen = true;
+            bChatOnGoing = true;
+            greenButton.interactable = false;
+            if (dialoguePanel.activeInHierarchy)
             {
-                CloseDialogue();
+                if (index == dialogue.Length - 1)
+                {
+                    CloseDialogue();
+                }
+                NextLine();
             }
-            NextLine();
+            else
+            {
+                redButton.interactable = true;
+                dialoguePanel.SetActive(true);
+                portraitPanel.SetActive(true);
+                StartCoroutine(Typing());
+            }
         }
         else
         {
-            redButton.interactable = true;
-            dialoguePanel.SetActive(true);
-            portraitPanel.SetActive(true);
-            StartCoroutine(Typing());
+            // Logic to interact with object
+            audioSystemController.PlayAudio();
         }
     }
 
