@@ -5,6 +5,7 @@ using UnityEngine;
 public class AudioController : MonoBehaviour
 {
     private AudioSource audioMusic;
+    [SerializeField]
     private AudioSource audioEffects;
 
     // System Controllers
@@ -12,16 +13,16 @@ public class AudioController : MonoBehaviour
     
     void Start()
     {
+        DontDestroyOnLoad(this.gameObject);
         // Audio
-        audioEffects = GameObject.Find("Entities/Door").GetComponent<AudioSource>();
+        //audioEffects = GameObject.Find("Entities/Door").GetComponent<AudioSource>();
         audioMusic = GetComponent<AudioSource>();
         
         audioMusic.loop = true;
         audioMusic.Play();
         
-
         // System Controllers
-        collisionController = GameObject.Find("Entities/Player").GetComponent<CollisionController>();
+        collisionController = GameObject.Find("Player").GetComponent<CollisionController>();
     }
 
     public void SetAudioEffect(AudioSource audioSource)

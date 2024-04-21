@@ -14,6 +14,7 @@ public class CollisionController : MonoBehaviour
     private DialogueController dialogueController;
     private AudioController audioSystemController;
     private InteractionController interactionController;
+    private SceneController sceneController;
 
     void Awake()
     {
@@ -29,21 +30,25 @@ public class CollisionController : MonoBehaviour
         dialogueController = GameObject.Find("Systems").GetComponent<DialogueController>();
         audioSystemController = GameObject.Find("Systems").GetComponent<AudioController>();
         interactionController = GameObject.Find("Systems").GetComponent<InteractionController>();
+        sceneController = GameObject.Find("Systems").GetComponent<SceneController>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("NPC") && other.GetComponent<Dialogue>().npc)
+        if (other.CompareTag("Interactable") && other.GetComponent<Data>().NPC)
         {
             bInside = true;
         }
-        if (other.CompareTag("NPC") && !dialogueController.IsChatGoing())
+        if (other.CompareTag("Interactable") && !dialogueController.IsChatGoing())
         {
-            dialogueController.getPortraitPanel().SetActive(true);
-            dialogueController.SetDialogue(other.GetComponent<Dialogue>().dialogue);
-            dialogueController.SetPortrait(other.GetComponent<Dialogue>().portrait);
-            interactionController.SetIsNPC(other.GetComponent<Dialogue>().npc);
+            // Transfer Data from Selected Target
+            dialogueController.SetDialogue(other.GetComponent<Data>().dialogue);
+            dialogueController.SetPortrait(other.GetComponent<Data>().portrait);
+            interactionController.SetIsNPC(other.GetComponent<Data>().NPC);
+            sceneController.SetScene(other.GetComponent<Data>().sceneAsset);
             audioSystemController.SetAudioEffect(other.GetComponent<AudioSource>());
+
+            dialogueController.getPortraitPanel().SetActive(true);
             greenButton.interactable = true;
             ColorBlock colours = greenButton.colors;
             Color normalColour = colours.normalColor;
@@ -55,7 +60,7 @@ public class CollisionController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("NPC"))
+        if (other.CompareTag("Interactable"))
         {
             bInside = false;
             greenButton.interactable = false;

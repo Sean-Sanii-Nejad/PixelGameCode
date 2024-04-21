@@ -39,7 +39,7 @@ public class DialogueController : MonoBehaviour
         portraitPanel.SetActive(false);
 
         // System Controllers
-        collisionController = GameObject.Find("Entities/Player").GetComponent<CollisionController>();
+        collisionController = GameObject.Find("Player").GetComponent<CollisionController>();
         audioController = GameObject.Find("Systems").GetComponent<AudioController>();
         interactionController = GetComponent<InteractionController>();
     }
@@ -82,6 +82,7 @@ public class DialogueController : MonoBehaviour
         interactionController.SetInteractableButton(InteractionController.ButtonType.GREEN, false);
         if (dialoguePanel.activeInHierarchy)
         {
+           
             if (index == dialogue.Length - 1)
             {
                 CloseDialogue();

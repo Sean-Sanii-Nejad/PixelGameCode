@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class Dialogue : MonoBehaviour
+public class Data : MonoBehaviour
 {
     public string[] dialogue;
-    public Sprite[] portraits;
     public Sprite portrait;
-    public bool npc;
+    public bool NPC;
+    public UnityEditor.SceneAsset sceneAsset;
 }

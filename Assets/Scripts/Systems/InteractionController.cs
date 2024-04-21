@@ -8,15 +8,15 @@ public class InteractionController : MonoBehaviour
     public enum ButtonType {GREEN, RED}
 
     // UI
-    public Button greenButton;
-    public Button redButton;
+    private Button greenButton;
+    private Button redButton;
 
     private bool bNPC = true;
 
     // System Controllers
-    private CollisionController collisionController;
     private DialogueController dialogueController;
     private AudioController audioController;
+    private SceneController sceneController;
 
     void Awake()
     {  
@@ -25,27 +25,15 @@ public class InteractionController : MonoBehaviour
         redButton = GameObject.Find("Canvas/PlayerControllerPanel/Back").GetComponent<Button>();
 
         // System Controllers
-        collisionController = GameObject.Find("Systems").GetComponent<CollisionController>();
         dialogueController = GameObject.Find("Systems").GetComponent<DialogueController>();
         audioController = GameObject.Find("Systems").GetComponent<AudioController>();
+        sceneController = GameObject.Find("Systems").GetComponent<SceneController>();
     }
 
     // Update is called once per frame
     void Update()
     {
         
-    }
-
-    public void InteractionButton()
-    {
-        if(bNPC)
-        {
-            dialogueController.OpenDialogue();
-        }
-        else
-        {
-            audioController.PlayAudio();
-        }
     }
 
     public void SetInteractableButton(ButtonType buttonType, bool value)
@@ -68,5 +56,18 @@ public class InteractionController : MonoBehaviour
     public void SetIsNPC(bool bNPC)
     {
         this.bNPC = bNPC;
+    }
+
+    public void InteractionButton()
+    {
+        if (bNPC) // Action button on NPCs 
+        {
+            dialogueController.OpenDialogue();
+        }
+        else // Action button on Items 
+        {
+            audioController.PlayAudio();
+            sceneController.LoadScene();
+        }
     }
 }
