@@ -104,6 +104,7 @@ public class DialogueSystemController : MonoBehaviour
         {
             // Logic to interact with object
             audioSystemController.PlayAudio();
+            
         }
     }
 
