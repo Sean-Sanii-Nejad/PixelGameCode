@@ -8,19 +8,27 @@ public class CollisionController : MonoBehaviour
 {
     private Button greenButton;
     private Button redButton;
-    private DialogueSystemController dialogueSystemController;
-    private AudioSystemController audioSystemController;
     private bool bInside;
+
+    // System Controllers
+    private DialogueController dialogueController;
+    private AudioController audioSystemController;
+    private InteractionController interactionController;
 
     void Awake()
     {
-        bInside = false;
+        // UI
         greenButton = GameObject.Find("Canvas/PlayerControllerPanel/Ok").GetComponent<Button>();
         redButton = GameObject.Find("Canvas/PlayerControllerPanel/Back").GetComponent<Button>();
-        dialogueSystemController = GameObject.Find("Systems").GetComponent<DialogueSystemController>();
-        audioSystemController = GameObject.Find("Systems").GetComponent<AudioSystemController>();
+        
+        bInside = false;
         greenButton.interactable = false;
         redButton.interactable = false;
+
+        // System Controllers
+        dialogueController = GameObject.Find("Systems").GetComponent<DialogueController>();
+        audioSystemController = GameObject.Find("Systems").GetComponent<AudioController>();
+        interactionController = GameObject.Find("Systems").GetComponent<InteractionController>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -29,12 +37,12 @@ public class CollisionController : MonoBehaviour
         {
             bInside = true;
         }
-        if (other.CompareTag("NPC") && !dialogueSystemController.IsChatGoing())
+        if (other.CompareTag("NPC") && !dialogueController.IsChatGoing())
         {
-            dialogueSystemController.getPortraitPanel().SetActive(true);
-            dialogueSystemController.SetDialogue(other.GetComponent<Dialogue>().dialogue);
-            dialogueSystemController.SetPortrait(other.GetComponent<Dialogue>().portrait);
-            dialogueSystemController.SetIsNPC(other.GetComponent<Dialogue>().npc);
+            dialogueController.getPortraitPanel().SetActive(true);
+            dialogueController.SetDialogue(other.GetComponent<Dialogue>().dialogue);
+            dialogueController.SetPortrait(other.GetComponent<Dialogue>().portrait);
+            interactionController.SetIsNPC(other.GetComponent<Dialogue>().npc);
             audioSystemController.SetAudioEffect(other.GetComponent<AudioSource>());
             greenButton.interactable = true;
             ColorBlock colours = greenButton.colors;
@@ -57,7 +65,7 @@ public class CollisionController : MonoBehaviour
             normalColour.a = 0.5f;
             colours.normalColor = normalColour;
             greenButton.colors = colours;
-            dialogueSystemController.CloseDialogue();
+            dialogueController.CloseDialogue();
         }
     }
 

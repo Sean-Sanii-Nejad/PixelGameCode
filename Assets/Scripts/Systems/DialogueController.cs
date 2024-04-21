@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogueSystemController : MonoBehaviour
+public class DialogueController : MonoBehaviour
 {
     public float wordSpeed;
-    public CollisionController collisionController;
-    public Button greenButton;
-    public Button redButton;
     public Animator animator;
 
+    // UI
     [SerializeField]
     private string[] dialogue;
     [SerializeField]
@@ -19,25 +17,31 @@ public class DialogueSystemController : MonoBehaviour
     private GameObject dialoguePanel;
     private GameObject portraitPanel;
     private Text dialogueText;
+    
     private bool bDialogueOpen;
     private bool bChatOnGoing;
-    private bool bNPC;
-    private AudioSystemController audioSystemController;
-    
+
+    // System Controllers
+    private AudioController audioController;
+    private InteractionController interactionController;
+    private CollisionController collisionController;
+
     void Start()
     {
-        portrait = GameObject.Find("Canvas/PortraitPanel/Portrait").GetComponent<Image>();
+        // UI
         dialoguePanel = GameObject.Find("Canvas/DialoguePanel");
         portraitPanel = GameObject.Find("Canvas/PortraitPanel");
+        portrait = GameObject.Find("Canvas/PortraitPanel/Portrait").GetComponent<Image>();
         dialogueText = GameObject.Find("Canvas/DialoguePanel/Text").GetComponent<Text>();
-        collisionController = GameObject.Find("Entities/Player").GetComponent<CollisionController>();
-        audioSystemController = GameObject.Find("Systems").GetComponent<AudioSystemController>();
-        greenButton = collisionController.GetGreenButton();
-        redButton = collisionController.GetRedButton();
-        dialoguePanel.SetActive(false);
-        portraitPanel.SetActive(false);
         bDialogueOpen = false;
         bChatOnGoing = false;
+        dialoguePanel.SetActive(false);
+        portraitPanel.SetActive(false);
+
+        // System Controllers
+        collisionController = GameObject.Find("Entities/Player").GetComponent<CollisionController>();
+        audioController = GameObject.Find("Systems").GetComponent<AudioController>();
+        interactionController = GetComponent<InteractionController>();
     }
 
     public void SetDialogue(string[] dialogue)
@@ -53,11 +57,6 @@ public class DialogueSystemController : MonoBehaviour
     public void SetDialogueOpen(bool value)
     {
         bDialogueOpen = value;
-    }
-
-    public void SetIsNPC(bool bNPC)
-    {
-        this.bNPC = bNPC;
     }
 
     public GameObject getPortraitPanel()
@@ -76,41 +75,31 @@ public class DialogueSystemController : MonoBehaviour
     }
 
     public void OpenDialogue()
-    {
-        if (bNPC)
+    {    
+        audioController.PlayAudio();
+        bDialogueOpen = true;
+        bChatOnGoing = true;
+        interactionController.SetInteractableButton(InteractionController.ButtonType.GREEN, false);
+        if (dialoguePanel.activeInHierarchy)
         {
-            //animator.Play("Luna_Talking",0);
-            audioSystemController.PlayAudio();
-            bDialogueOpen = true;
-            bChatOnGoing = true;
-            greenButton.interactable = false;
-            if (dialoguePanel.activeInHierarchy)
+            if (index == dialogue.Length - 1)
             {
-                if (index == dialogue.Length - 1)
-                {
-                    CloseDialogue();
-                }
-                NextLine();
+                CloseDialogue();
             }
-            else
-            {
-                redButton.interactable = true;
-                dialoguePanel.SetActive(true);
-                portraitPanel.SetActive(true);
-                StartCoroutine(Typing());
-            }
+            NextLine();
         }
         else
         {
-            // Logic to interact with object
-            audioSystemController.PlayAudio();
-            
-        }
+            interactionController.SetInteractableButton(InteractionController.ButtonType.RED, true);
+            dialoguePanel.SetActive(true);
+            portraitPanel.SetActive(true);
+            StartCoroutine(Typing());
+        }  
     }
 
     public void CloseDialogue()
     {
-        audioSystemController.StopAudio();
+        audioController.StopAudio();
         bDialogueOpen = false;
         dialogueText.text = "";
         dialoguePanel.SetActive(false);
@@ -135,7 +124,7 @@ public class DialogueSystemController : MonoBehaviour
             dialogueText.text += letter;
             yield return new WaitForSeconds(wordSpeed);
         }
-        audioSystemController.StopAudio();
+        audioController.StopAudio();
         if (!bDialogueOpen)
         {
             dialogueText.text = "";
@@ -143,7 +132,7 @@ public class DialogueSystemController : MonoBehaviour
         bChatOnGoing = false;
         if (collisionController.IsInside())
         {
-            greenButton.interactable = true;
+            interactionController.SetInteractableButton(InteractionController.ButtonType.GREEN, true);
         }
     }
 }

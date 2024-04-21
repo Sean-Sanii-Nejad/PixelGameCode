@@ -2,19 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioSystemController : MonoBehaviour
+public class AudioController : MonoBehaviour
 {
     private AudioSource audioMusic;
     private AudioSource audioEffects;
+
+    // System Controllers
     private CollisionController collisionController;
     
     void Start()
     {
-        collisionController = GameObject.Find("Entities/Player").GetComponent<CollisionController>();
+        // Audio
         audioEffects = GameObject.Find("Entities/Door").GetComponent<AudioSource>();
-        audioMusic = GetComponent<AudioSource>();  
-        audioMusic.Play();
+        audioMusic = GetComponent<AudioSource>();
+        
         audioMusic.loop = true;
+        audioMusic.Play();
+        
+
+        // System Controllers
+        collisionController = GameObject.Find("Entities/Player").GetComponent<CollisionController>();
     }
 
     public void SetAudioEffect(AudioSource audioSource)

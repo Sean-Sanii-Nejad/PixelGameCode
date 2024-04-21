@@ -9,9 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9171204991418687048}
+  - component: {fileID: 906375941538983169}
   - component: {fileID: 1502856375967994890}
   - component: {fileID: 2044257035007888300}
-  - component: {fileID: 906375941538983169}
+  - component: {fileID: 1799759154636408791}
   m_Layer: 0
   m_Name: Systems
   m_TagString: Untagged
@@ -34,37 +35,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1502856375967994890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7640539349198141440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d08e62ce758eb844ac9850e1671b848, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wordSpeed: 0.03
-  collisionController: {fileID: 0}
-  greenButton: {fileID: 0}
-  redButton: {fileID: 0}
-  animator: {fileID: 0}
-  dialogue: []
-  portrait: {fileID: 0}
---- !u!114 &2044257035007888300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7640539349198141440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81e32e42fdf0f6f4391d43b576f2ee4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &906375941538983169
 AudioSource:
   m_ObjectHideFlags: 0
@@ -161,3 +131,46 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1502856375967994890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7640539349198141440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d08e62ce758eb844ac9850e1671b848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wordSpeed: 0.03
+  collisionController: {fileID: 0}
+  greenButton: {fileID: 0}
+  redButton: {fileID: 0}
+  animator: {fileID: 0}
+  dialogue: []
+  portrait: {fileID: 0}
+--- !u!114 &2044257035007888300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7640539349198141440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81e32e42fdf0f6f4391d43b576f2ee4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1799759154636408791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7640539349198141440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a61a830eaf77b8a4fa2177e101520128, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
