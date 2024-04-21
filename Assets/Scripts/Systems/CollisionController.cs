@@ -9,6 +9,7 @@ public class CollisionController : MonoBehaviour
     private Button greenButton;
     private Button redButton;
     private DialogueSystemController dialogueSystemController;
+    private AudioSystemController audioSystemController;
     private bool bInside;
 
     void Awake()
@@ -17,6 +18,7 @@ public class CollisionController : MonoBehaviour
         greenButton = GameObject.Find("Canvas/PlayerControllerPanel/Ok").GetComponent<Button>();
         redButton = GameObject.Find("Canvas/PlayerControllerPanel/Back").GetComponent<Button>();
         dialogueSystemController = GameObject.Find("Systems").GetComponent<DialogueSystemController>();
+        audioSystemController = GameObject.Find("Systems").GetComponent<AudioSystemController>();
         greenButton.interactable = false;
         redButton.interactable = false;
     }
@@ -33,6 +35,7 @@ public class CollisionController : MonoBehaviour
             dialogueSystemController.SetDialogue(other.GetComponent<Dialogue>().dialogue);
             dialogueSystemController.SetPortrait(other.GetComponent<Dialogue>().portrait);
             dialogueSystemController.SetIsNPC(other.GetComponent<Dialogue>().npc);
+            audioSystemController.SetAudioEffect(other.GetComponent<AudioSource>());
             greenButton.interactable = true;
             ColorBlock colours = greenButton.colors;
             Color normalColour = colours.normalColor;

@@ -9,6 +9,7 @@ public class DialogueSystemController : MonoBehaviour
     public CollisionController collisionController;
     public Button greenButton;
     public Button redButton;
+    public Animator animator;
 
     [SerializeField]
     private string[] dialogue;
@@ -78,6 +79,8 @@ public class DialogueSystemController : MonoBehaviour
     {
         if (bNPC)
         {
+            //animator.Play("Luna_Talking",0);
+            audioSystemController.PlayAudio();
             bDialogueOpen = true;
             bChatOnGoing = true;
             greenButton.interactable = false;
@@ -106,6 +109,7 @@ public class DialogueSystemController : MonoBehaviour
 
     public void CloseDialogue()
     {
+        audioSystemController.StopAudio();
         bDialogueOpen = false;
         dialogueText.text = "";
         dialoguePanel.SetActive(false);
@@ -130,6 +134,7 @@ public class DialogueSystemController : MonoBehaviour
             dialogueText.text += letter;
             yield return new WaitForSeconds(wordSpeed);
         }
+        audioSystemController.StopAudio();
         if (!bDialogueOpen)
         {
             dialogueText.text = "";

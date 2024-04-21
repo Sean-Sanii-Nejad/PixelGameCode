@@ -6,13 +6,20 @@ public class AudioSystemController : MonoBehaviour
 {
     private AudioSource audioMusic;
     private AudioSource audioEffects;
+    private CollisionController collisionController;
     
     void Start()
     {
-        audioMusic = GetComponent<AudioSource>();
+        collisionController = GameObject.Find("Entities/Player").GetComponent<CollisionController>();
         audioEffects = GameObject.Find("Entities/Door").GetComponent<AudioSource>();
+        audioMusic = GetComponent<AudioSource>();  
         audioMusic.Play();
         audioMusic.loop = true;
+    }
+
+    public void SetAudioEffect(AudioSource audioSource)
+    {
+        audioEffects = audioSource;
     }
 
     public AudioSource GetAudioEffects()
@@ -28,6 +35,11 @@ public class AudioSystemController : MonoBehaviour
     public void PlayAudio()
     {
         audioEffects.Play();
+    }
+
+    public void StopAudio()
+    {
+        audioEffects.Stop();
     }
 
     public void PlayerMusic()
