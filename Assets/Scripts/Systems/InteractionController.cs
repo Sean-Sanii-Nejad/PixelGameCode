@@ -17,7 +17,7 @@ public class InteractionController : MonoBehaviour
     private DialogueController dialogueController;
     private AudioController audioController;
     private SceneController sceneController;
-
+    
     void Awake()
     {  
         // UI

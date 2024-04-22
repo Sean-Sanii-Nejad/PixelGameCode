@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 1f;
-
     private Rigidbody2D rigidBody2D;
     private Animator animator;
     private Vector2 movement;
     private GameObject player;
 
+    private AttributeSet attributeSet;
+
     void Awake()
     {
+        player = GameObject.Find("Player");
         rigidBody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        player = GameObject.Find("Player");
+        attributeSet = GetComponent<AttributeSet>();
     }
 
     void Update()
@@ -27,7 +28,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        rigidBody2D.MovePosition(rigidBody2D.position + movement.normalized * moveSpeed * Time.fixedDeltaTime);
+        rigidBody2D.MovePosition(rigidBody2D.position + movement.normalized * attributeSet.GetSpeed() * Time.fixedDeltaTime);
     }
 
     public GameObject GetPlayer()

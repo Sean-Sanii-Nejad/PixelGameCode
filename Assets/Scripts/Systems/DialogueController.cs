@@ -48,7 +48,7 @@ public class DialogueController : MonoBehaviour
         // System Controllers
         collisionController = GameObject.Find("Player").GetComponent<CollisionController>();
         audioController = GameObject.Find("Systems").GetComponent<AudioController>();
-        interactionController = GetComponent<InteractionController>();
+        interactionController = GameObject.Find("Systems").GetComponent<InteractionController>();
     }
 
     public void SetDialogue(string[] dialogue)

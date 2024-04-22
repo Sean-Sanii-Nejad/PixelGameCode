@@ -5,8 +5,9 @@ using UnityEngine;
 public class AudioController : MonoBehaviour
 {
     private AudioSource audioMusic;
-    [SerializeField]
-    private AudioSource audioEffects;
+
+    [SerializeField] private AudioSource audioEffects;
+    [SerializeField] private AudioSource audioDebuffSlow;
 
     // System Controllers
     private CollisionController collisionController;
@@ -42,6 +43,16 @@ public class AudioController : MonoBehaviour
     public void PlayAudio()
     {
         audioEffects.Play();
+    }
+
+    public void PlayDebuffSlow()
+    {
+        audioDebuffSlow.Play();
+    }
+
+    public void StopDebuffSlow()
+    {
+        audioDebuffSlow.Stop();
     }
 
     public void StopAudio()

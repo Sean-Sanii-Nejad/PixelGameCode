@@ -15,6 +15,8 @@ public class CollisionController : MonoBehaviour
     private AudioController audioSystemController;
     private InteractionController interactionController;
     private SceneController sceneController;
+    private AbilitySystemController abilitySystemController;
+    private UIController UIController;
 
     void Awake()
     {
@@ -31,10 +33,19 @@ public class CollisionController : MonoBehaviour
         audioSystemController = GameObject.Find("Systems").GetComponent<AudioController>();
         interactionController = GameObject.Find("Systems").GetComponent<InteractionController>();
         sceneController = GameObject.Find("Systems").GetComponent<SceneController>();
+        abilitySystemController = GameObject.Find("Systems").GetComponent<AbilitySystemController>();
+        UIController = GameObject.Find("Systems").GetComponent<UIController>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.CompareTag("Debuff"))
+        {
+            audioSystemController.PlayDebuffSlow();
+            UIController.SetDebuffSymbol(true);
+            Debug.Log("Player Slow Audio");
+        }
+
         if (other.CompareTag("Interactable") && other.GetComponent<Data>().NPC)
         {
             bInside = true;
@@ -56,6 +67,9 @@ public class CollisionController : MonoBehaviour
             colours.normalColor = normalColour;
             greenButton.colors = colours;
         }
+
+        
+
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -72,7 +86,23 @@ public class CollisionController : MonoBehaviour
             greenButton.colors = colours;
             dialogueController.CloseDialogue();
         }
+
+        if (other.CompareTag("Debuff"))
+        {
+            abilitySystemController.RemoveDebuff(AbilitySystemController.DebuffType.SLOW, 0f);
+            audioSystemController.StopDebuffSlow();
+            UIController.SetDebuffSymbol(false);
+        }
     }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.CompareTag("Debuff"))
+        {
+            abilitySystemController.TriggerDebuff(AbilitySystemController.DebuffType.SLOW, 0f);
+        }
+    }
+
 
     public Button GetGreenButton()
     {

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - NPC
   - Interactable
+  - Debuff
   layers:
   - Default
   - TransparentFX
@@ -14,7 +15,7 @@ TagManager:
   - Water
   - UI
   - CharacterCollision
-  - 
+  - DebuffCollision
   - 
   - 
   - 
