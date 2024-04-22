@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4449158446453542292}
   - component: {fileID: 2216134920147157986}
   - component: {fileID: 2914399651359377917}
+  - component: {fileID: 8131862245739220039}
   - component: {fileID: 2652123069919479369}
   - component: {fileID: 3119947098395302768}
   - component: {fileID: 6871167872773257538}
@@ -93,6 +94,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionAnim: {fileID: 0}
+--- !u!114 &8131862245739220039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580967297925095285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ba28e326d15c144286382c367494073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2652123069919479369
 MonoBehaviour:
   m_ObjectHideFlags: 0

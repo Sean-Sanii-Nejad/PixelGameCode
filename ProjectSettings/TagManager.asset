@@ -7,6 +7,7 @@ TagManager:
   - NPC
   - Interactable
   - Debuff
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -52,4 +53,7 @@ TagManager:
     locked: 0
   - name: Characters
     uniqueID: 14742863
+    locked: 0
+  - name: VFX
+    uniqueID: 2482370145
     locked: 0

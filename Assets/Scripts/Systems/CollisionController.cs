@@ -17,6 +17,7 @@ public class CollisionController : MonoBehaviour
     private SceneController sceneController;
     private AbilitySystemController abilitySystemController;
     private UIController UIController;
+    private VFXController VFXController;
 
     void Awake()
     {
@@ -35,17 +36,11 @@ public class CollisionController : MonoBehaviour
         sceneController = GameObject.Find("Systems").GetComponent<SceneController>();
         abilitySystemController = GameObject.Find("Systems").GetComponent<AbilitySystemController>();
         UIController = GameObject.Find("Systems").GetComponent<UIController>();
+        VFXController = GameObject.Find("Systems").GetComponent<VFXController>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Debuff"))
-        {
-            audioSystemController.PlayDebuffSlow();
-            UIController.SetDebuffSymbol(true);
-            Debug.Log("Player Slow Audio");
-        }
-
         if (other.CompareTag("Interactable") && other.GetComponent<Data>().NPC)
         {
             bInside = true;
@@ -67,9 +62,12 @@ public class CollisionController : MonoBehaviour
             colours.normalColor = normalColour;
             greenButton.colors = colours;
         }
-
-        
-
+        if (other.CompareTag("Debuff"))
+        {
+            audioSystemController.PlayDebuffSlow();
+            UIController.SetDebuffSymbol(true);
+            VFXController.PlayParticleSystem();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
