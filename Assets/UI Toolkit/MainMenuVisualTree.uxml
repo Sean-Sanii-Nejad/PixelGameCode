@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=4cc485990c995f9459f431fe14f18bff&amp;type=3#MainMenuStyle" />
+    <ui:VisualElement name="Container" style="flex-grow: 1; background-image: none; width: auto; height: auto;">
+        <ui:Label tabindex="-1" text="Main Menu" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Header" class="header" style="-unity-text-align: upper-center; font-size: 200px;" />
+        <ui:Button text="Start" parse-escape-sequences="true" display-tooltip-when-elided="true" name="StartButton" class="button" style="background-image: none;" />
+        <ui:Button text="Settings" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SettingsButton" class="button" style="margin-top: 4%;" />
+        <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Ghosty" style="background-image: url(&quot;project://database/Assets/Sprites/Characters/Player/Player.png?fileID=-6598946016331564889&amp;guid=23748c298f885bf4c89671f6d30f562b&amp;type=3#Down 0&quot;); width: 202px; height: 200px; justify-content: flex-start; align-self: center; margin-top: 102px;" />
+    </ui:VisualElement>
+</ui:UXML>

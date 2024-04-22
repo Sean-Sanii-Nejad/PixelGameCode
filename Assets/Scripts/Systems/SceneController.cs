@@ -9,32 +9,41 @@ public class SceneController : MonoBehaviour
     public static SceneController instance;
 
     [SerializeField] private Animator transitionAnim;
-    private SceneAsset sceneAsset;
+    private string sceneName;
     private Transform playerTransform;
+    private DialogueController dialogueController;
+    private PlayerController playerController;
 
     void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
         playerTransform = GameObject.Find("Player").GetComponent<Transform>();
+        dialogueController = GameObject.Find("Systems").GetComponent <DialogueController>();
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        playerController.gameObject.SetActive(false);
     }
 
-    public void SetScene(SceneAsset sceneAsset)
+    public void SetScene(string sceneName)
     {
-        this.sceneAsset = sceneAsset;
+        this.sceneName = sceneName;
     }
 
     public void LoadScene()
     {
-        StartCoroutine(LoadRedHouse());
+        StartCoroutine(LoadSceneDelay());
     }
 
-    IEnumerator LoadRedHouse()
+    IEnumerator LoadSceneDelay()
     {
-        Debug.Log(sceneAsset.name);
+        Debug.Log(sceneName);
         transitionAnim.SetTrigger("End");
         yield return new WaitForSeconds(1);
-        SceneManager.LoadScene(sceneAsset.name);
-        playerTransform.position = new Vector3(0.0722465217f, -4.08670235f);
+        SceneManager.LoadScene(sceneName);
+        dialogueController.GetPlayerControllerPanel().SetActive(true);
+        playerController.GetPlayer().SetActive(true);
+        if(sceneName.Equals("RedHouse")) playerTransform.position = new Vector3(0.0722465217f, -4.08670235f);
+        else if (sceneName.Equals("PixelScene")) playerTransform.position = new Vector3(1.47000003f, -0.579999983f);
         transitionAnim.SetTrigger("Start");
     }
 }
+
+

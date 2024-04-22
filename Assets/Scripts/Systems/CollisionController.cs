@@ -45,10 +45,10 @@ public class CollisionController : MonoBehaviour
             dialogueController.SetDialogue(other.GetComponent<Data>().dialogue);
             dialogueController.SetPortrait(other.GetComponent<Data>().portrait);
             interactionController.SetIsNPC(other.GetComponent<Data>().NPC);
-            sceneController.SetScene(other.GetComponent<Data>().sceneAsset);
+            sceneController.SetScene(other.GetComponent<Data>().sceneName);
             audioSystemController.SetAudioEffect(other.GetComponent<AudioSource>());
 
-            dialogueController.getPortraitPanel().SetActive(true);
+            dialogueController.GetPortraitPanel().SetActive(true);
             greenButton.interactable = true;
             ColorBlock colours = greenButton.colors;
             Color normalColour = colours.normalColor;

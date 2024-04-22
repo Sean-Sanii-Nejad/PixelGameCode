@@ -9,11 +9,13 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rigidBody2D;
     private Animator animator;
     private Vector2 movement;
+    private GameObject player;
 
-    void Start()
+    void Awake()
     {
         rigidBody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        player = GameObject.Find("Player");
     }
 
     void Update()
@@ -26,6 +28,11 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         rigidBody2D.MovePosition(rigidBody2D.position + movement.normalized * moveSpeed * Time.fixedDeltaTime);
+    }
+
+    public GameObject GetPlayer()
+    {
+        return player;
     }
 
     public void MoveUp()

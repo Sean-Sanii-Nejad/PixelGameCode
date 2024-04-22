@@ -11,9 +11,8 @@ public class AudioController : MonoBehaviour
     // System Controllers
     private CollisionController collisionController;
     
-    void Start()
+    void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
         // Audio
         //audioEffects = GameObject.Find("Entities/Door").GetComponent<AudioSource>();
         audioMusic = GetComponent<AudioSource>();

@@ -14,8 +14,12 @@ public class DialogueController : MonoBehaviour
     [SerializeField]
     private Image portrait;
     private int index;
+    
     private GameObject dialoguePanel;
     private GameObject portraitPanel;
+    private GameObject playerControllerPanel;
+
+
     private Text dialogueText;
     
     private bool bDialogueOpen;
@@ -26,17 +30,20 @@ public class DialogueController : MonoBehaviour
     private InteractionController interactionController;
     private CollisionController collisionController;
 
-    void Start()
+    void Awake()
     {
         // UI
         dialoguePanel = GameObject.Find("Canvas/DialoguePanel");
         portraitPanel = GameObject.Find("Canvas/PortraitPanel");
+        playerControllerPanel = GameObject.Find("Canvas/PlayerControllerPanel");
+
         portrait = GameObject.Find("Canvas/PortraitPanel/Portrait").GetComponent<Image>();
         dialogueText = GameObject.Find("Canvas/DialoguePanel/Text").GetComponent<Text>();
         bDialogueOpen = false;
         bChatOnGoing = false;
         dialoguePanel.SetActive(false);
         portraitPanel.SetActive(false);
+        playerControllerPanel.SetActive(false); 
 
         // System Controllers
         collisionController = GameObject.Find("Player").GetComponent<CollisionController>();
@@ -59,9 +66,14 @@ public class DialogueController : MonoBehaviour
         bDialogueOpen = value;
     }
 
-    public GameObject getPortraitPanel()
+    public GameObject GetPortraitPanel()
     {
         return portraitPanel;
+    }
+
+    public GameObject GetPlayerControllerPanel()
+    {
+        return playerControllerPanel;
     }
 
     public bool IsChatGoing()
