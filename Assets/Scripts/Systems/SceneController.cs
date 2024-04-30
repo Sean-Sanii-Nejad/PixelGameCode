@@ -17,9 +17,13 @@ public class SceneController : MonoBehaviour
     void Start()
     {
         playerTransform = GameObject.Find("Player").GetComponent<Transform>();
-        dialogueController = GameObject.Find("Systems").GetComponent <DialogueController>();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         playerController.gameObject.SetActive(false);
+    }
+
+    void Awake()
+    {
+        dialogueController = GameObject.Find("Systems/DialogueController").GetComponent<DialogueController>();
     }
 
     public void SetScene(string sceneName)

@@ -17,17 +17,20 @@ public class InteractionController : MonoBehaviour
     private DialogueController dialogueController;
     private AudioController audioController;
     private SceneController sceneController;
-    
+
+    void Start()
+    {
+        // System Controllers
+        dialogueController = GameObject.Find("Systems/DialogueController").GetComponent<DialogueController>();
+        audioController = GameObject.Find("Systems/AudioController").GetComponent<AudioController>();
+        sceneController = GameObject.Find("Systems/SceneController").GetComponent<SceneController>();
+    }
+
     void Awake()
     {  
         // UI
         greenButton = GameObject.Find("Canvas/PlayerControllerPanel/Ok").GetComponent<Button>();
         redButton = GameObject.Find("Canvas/PlayerControllerPanel/Back").GetComponent<Button>();
-
-        // System Controllers
-        dialogueController = GameObject.Find("Systems").GetComponent<DialogueController>();
-        audioController = GameObject.Find("Systems").GetComponent<AudioController>();
-        sceneController = GameObject.Find("Systems").GetComponent<SceneController>();
     }
 
     // Update is called once per frame

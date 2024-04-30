@@ -19,7 +19,6 @@ public class DialogueController : MonoBehaviour
     private GameObject portraitPanel;
     private GameObject playerControllerPanel;
 
-
     private Text dialogueText;
     
     private bool bDialogueOpen;
@@ -30,6 +29,15 @@ public class DialogueController : MonoBehaviour
     private InteractionController interactionController;
     private CollisionController collisionController;
 
+    void Start()
+    {
+        bDialogueOpen = false;
+        bChatOnGoing = false;
+        dialoguePanel.SetActive(false);
+        portraitPanel.SetActive(false);
+        playerControllerPanel.SetActive(false);
+    }
+
     void Awake()
     {
         // UI
@@ -39,15 +47,11 @@ public class DialogueController : MonoBehaviour
 
         portrait = GameObject.Find("Canvas/PortraitPanel/Portrait").GetComponent<Image>();
         dialogueText = GameObject.Find("Canvas/DialoguePanel/Text").GetComponent<Text>();
-        bDialogueOpen = false;
-        bChatOnGoing = false;
-        dialoguePanel.SetActive(false);
-        portraitPanel.SetActive(false);
-        playerControllerPanel.SetActive(false); 
+        
 
         // System Controllers
         collisionController = GameObject.Find("Player").GetComponent<CollisionController>();
-        audioController = GameObject.Find("Systems").GetComponent<AudioController>();
+        audioController = GameObject.Find("Systems/AudioController").GetComponent<AudioController>();
         interactionController = GameObject.Find("Systems").GetComponent<InteractionController>();
     }
 

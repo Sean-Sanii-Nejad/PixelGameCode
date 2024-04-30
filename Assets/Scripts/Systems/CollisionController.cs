@@ -30,13 +30,13 @@ public class CollisionController : MonoBehaviour
         redButton.interactable = false;
 
         // System Controllers
-        dialogueController = GameObject.Find("Systems").GetComponent<DialogueController>();
-        audioSystemController = GameObject.Find("Systems").GetComponent<AudioController>();
+        dialogueController = GameObject.Find("Systems/DialogueController").GetComponent<DialogueController>();
+        audioSystemController = GameObject.Find("Systems/AudioController").GetComponent<AudioController>();
         interactionController = GameObject.Find("Systems").GetComponent<InteractionController>();
-        sceneController = GameObject.Find("Systems").GetComponent<SceneController>();
-        abilitySystemController = GameObject.Find("Systems").GetComponent<AbilitySystemController>();
-        UIController = GameObject.Find("Systems").GetComponent<UIController>();
-        VFXController = GameObject.Find("Systems").GetComponent<VFXController>();
+        sceneController = GameObject.Find("Systems/SceneController").GetComponent<SceneController>();
+        abilitySystemController = GameObject.Find("Systems/AbilitySystemController").GetComponent<AbilitySystemController>();
+        UIController = GameObject.Find("Systems/UIController").GetComponent<UIController>();
+        VFXController = GameObject.Find("Systems/VFXController").GetComponent<VFXController>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)

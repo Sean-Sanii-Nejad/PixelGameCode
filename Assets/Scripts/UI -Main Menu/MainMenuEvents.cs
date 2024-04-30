@@ -9,12 +9,16 @@ public class MainMenuEvents : MonoBehaviour
     private Button button;
     private SceneController sceneController;
 
+    void Start()
+    {
+        sceneController = GameObject.Find("Systems/SceneController").GetComponent<SceneController>();
+    }
+
     void Awake()
     {
         document = GetComponent<UIDocument>();
         button = document.rootVisualElement.Q("StartButton") as Button;
         button.RegisterCallback<ClickEvent>(OnPlayGameClick);
-        sceneController = GameObject.Find("Systems").GetComponent<SceneController>();
     }
 
     private void OnDisable()
