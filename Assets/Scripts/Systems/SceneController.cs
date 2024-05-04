@@ -19,6 +19,7 @@ public class SceneController : MonoBehaviour
         playerTransform = GameObject.Find("Player").GetComponent<Transform>();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         playerController.gameObject.SetActive(false);
+        sceneName = "StartMenu";
     }
 
     void Awake()
@@ -29,6 +30,11 @@ public class SceneController : MonoBehaviour
     public void SetScene(string sceneName)
     {
         this.sceneName = sceneName;
+    }
+
+    public string GetScene()
+    {
+        return sceneName;
     }
 
     public void LoadScene()
@@ -44,9 +50,21 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene(sceneName);
         dialogueController.GetPlayerControllerPanel().SetActive(true);
         playerController.GetPlayer().SetActive(true);
-        if(sceneName.Equals("RedHouse")) playerTransform.position = new Vector3(0.0722465217f, -4.08670235f);
+        if (sceneName.Equals("RedHouse")) playerTransform.position = new Vector3(0.0722465217f, -4.08670235f);
         else if (sceneName.Equals("PixelScene")) playerTransform.position = new Vector3(1.47000003f, -0.579999983f);
+        else if (sceneName.Equals("BattleScene"))
+        {
+            playerTransform.position = new Vector3(50f, 50f);
+            dialogueController.OpenBattleHUD();
+            dialogueController.ClosePlayerControllerPanel();
+
+        } 
         transitionAnim.SetTrigger("Start");
+    }
+
+    public void SetPlayerPosition(Vector3 position)
+    {
+        playerTransform.position = position;
     }
 }
 

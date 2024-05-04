@@ -8,6 +8,7 @@ public class AudioController : MonoBehaviour
 
     [SerializeField] private AudioSource audioEffects;
     [SerializeField] private AudioSource audioDebuffSlow;
+    [SerializeField] private AudioSource audioAttack;
 
     // System Controllers
     private CollisionController collisionController;
@@ -38,6 +39,11 @@ public class AudioController : MonoBehaviour
     public AudioSource GetMusicEffects()
     {
         return audioMusic;
+    }
+
+    public void PlayAttack()
+    {
+        audioAttack.Play();
     }
 
     public void PlayAudio()

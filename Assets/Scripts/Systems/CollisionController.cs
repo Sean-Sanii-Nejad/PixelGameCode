@@ -19,6 +19,12 @@ public class CollisionController : MonoBehaviour
     private UIController UIController;
     private VFXController VFXController;
 
+    public float effectTriggerInterval = 1f; 
+    public float probability = 0.2f; 
+    private bool isInsideDebuff = false;
+
+    private Coroutine effectCoroutine;
+
     void Awake()
     {
         // UI
@@ -64,9 +70,12 @@ public class CollisionController : MonoBehaviour
         }
         if (other.CompareTag("Debuff"))
         {
+            isInsideDebuff = true;
             audioSystemController.PlayDebuffSlow();
             UIController.SetDebuffSymbol(true);
             VFXController.PlayParticleSystem();
+            if (effectCoroutine == null)
+                effectCoroutine = StartCoroutine(TriggerEffect());
         }
     }
 
@@ -87,9 +96,16 @@ public class CollisionController : MonoBehaviour
 
         if (other.CompareTag("Debuff"))
         {
+            isInsideDebuff = false;
             abilitySystemController.RemoveDebuff(AbilitySystemController.DebuffType.SLOW, 0f);
             audioSystemController.StopDebuffSlow();
             UIController.SetDebuffSymbol(false);
+            VFXController.StopParticleSystem();
+            if (effectCoroutine != null)
+            {
+                StopCoroutine(effectCoroutine);
+                effectCoroutine = null;
+            }
         }
     }
 
@@ -115,5 +131,19 @@ public class CollisionController : MonoBehaviour
     public bool IsInside()
     {
         return bInside;
+    }
+
+    private IEnumerator TriggerEffect()
+    {
+        while (isInsideDebuff)
+        {
+            Debug.Log(Random.value);
+            if (Random.value < probability)
+            {
+                sceneController.SetScene("BattleScene");
+                sceneController.LoadScene();
+            }
+            yield return new WaitForSeconds(effectTriggerInterval);
+        }
     }
 }

@@ -19,6 +19,13 @@ public class DialogueController : MonoBehaviour
     private GameObject portraitPanel;
     private GameObject playerControllerPanel;
 
+    private GameObject playerBattleHUD_Battle;
+    private GameObject enemyBattleHUD_Battle;
+    private GameObject dialoguePanel_Battle;
+
+    private GameObject playerBattleStation;
+    private GameObject enemyBattleStation;
+
     private Text dialogueText;
     
     private bool bDialogueOpen;
@@ -36,6 +43,13 @@ public class DialogueController : MonoBehaviour
         dialoguePanel.SetActive(false);
         portraitPanel.SetActive(false);
         playerControllerPanel.SetActive(false);
+
+        playerBattleHUD_Battle.SetActive(false);
+        enemyBattleHUD_Battle.SetActive(false);
+        dialoguePanel_Battle.SetActive(false);
+
+        playerBattleStation.SetActive(false);
+        enemyBattleStation.SetActive(false);
     }
 
     void Awake()
@@ -45,9 +59,17 @@ public class DialogueController : MonoBehaviour
         portraitPanel = GameObject.Find("Canvas/PortraitPanel");
         playerControllerPanel = GameObject.Find("Canvas/PlayerControllerPanel");
 
+        playerBattleHUD_Battle = GameObject.Find("Canvas/PlayerBattleHud_Battle");
+        enemyBattleHUD_Battle = GameObject.Find("Canvas/EnemyBattleHud_Battle");
+        dialoguePanel_Battle = GameObject.Find("Canvas/DialoguePanel_Battle");
+
         portrait = GameObject.Find("Canvas/PortraitPanel/Portrait").GetComponent<Image>();
         dialogueText = GameObject.Find("Canvas/DialoguePanel/Text").GetComponent<Text>();
+
+        playerBattleStation = GameObject.Find("PlayerBattleStation");
+        enemyBattleStation = GameObject.Find("EnemyBattleStation");
         
+
 
         // System Controllers
         collisionController = GameObject.Find("Player").GetComponent<CollisionController>();
@@ -151,5 +173,30 @@ public class DialogueController : MonoBehaviour
         {
             interactionController.SetInteractableButton(InteractionController.ButtonType.GREEN, true);
         }
+    }
+
+    public void OpenBattleHUD()
+    {
+        playerBattleHUD_Battle.SetActive(true);
+        enemyBattleHUD_Battle.SetActive(true);
+        dialoguePanel_Battle.SetActive(true);
+        
+        playerBattleStation.SetActive(true);
+        enemyBattleStation.SetActive(true);
+    }
+
+    public void CloseBattleHUD()
+    {
+        playerBattleHUD_Battle.SetActive(false);
+        enemyBattleHUD_Battle.SetActive(false);
+        dialoguePanel_Battle.SetActive(false);
+
+        playerBattleStation.SetActive(false);
+        enemyBattleStation.SetActive(false);
+    }
+
+    public void ClosePlayerControllerPanel()
+    {
+        playerControllerPanel.SetActive(false);
     }
 }
